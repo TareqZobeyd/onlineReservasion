@@ -16,8 +16,14 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+        $reservations = $request->user()->reservations()
+            ->with('restaurant')
+            ->latest()
+            ->paginate(10);
+
         return view('profile.edit', [
             'user' => $request->user(),
+            'reservations' => $reservations,
         ]);
     }
 

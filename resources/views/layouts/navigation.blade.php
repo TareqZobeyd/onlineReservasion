@@ -5,51 +5,84 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{ route('home') }}">
                         <x-application-logo class="block h-9 w-auto fill-current text-gray-800" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                        {{ __('Dashboard') }}
-                    </x-nav-link>
+                    @auth
+                        @if(auth()->user()->hasRole('admin'))
+                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                                {{ __('داشبورد ادمین') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.restaurants.index')" :active="request()->routeIs('admin.restaurants.*')">
+                                {{ __('رستوران‌ها') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                                {{ __('کاربران') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('admin.reservations.index')" :active="request()->routeIs('admin.reservations.*')">
+                                {{ __('رزروها') }}
+                            </x-nav-link>
+                        @endif
+
+                        @if(auth()->user()->hasRole('restaurant_owner'))
+                            <x-nav-link :href="route('restaurant.dashboard')" :active="request()->routeIs('restaurant.dashboard')">
+                                {{ __('داشبورد رستوران') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('restaurant.menus.index')" :active="request()->routeIs('restaurant.menus.*')">
+                                {{ __('منوها') }}
+                            </x-nav-link>
+                            <x-nav-link :href="route('restaurant.reservations.index')" :active="request()->routeIs('restaurant.reservations.*')">
+                                {{ __('رزروها') }}
+                            </x-nav-link>
+                        @endif
+                    @endauth
                 </div>
             </div>
 
-            <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ms-6">
-                <x-dropdown align="right" width="48">
-                    <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                @auth
+                    <!-- Settings Dropdown -->
+                    <div class="ms-3 relative">
+                        <x-dropdown align="right" width="48">
+                            <x-slot name="trigger">
+                                <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                                    <div>{{ Auth::user()->name }}</div>
 
-                            <div class="ms-1">
-                                <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                    <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                </svg>
-                            </div>
-                        </button>
-                    </x-slot>
+                                    <div class="ms-1">
+                                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                                            <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                </button>
+                            </x-slot>
 
-                    <x-slot name="content">
-                        <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
-                        </x-dropdown-link>
+                            <x-slot name="content">
+                                <x-dropdown-link :href="route('profile.edit')" class="w-full text-right">
+                                    {{ __('پروفایل') }}
+                                </x-dropdown-link>
 
-                        <!-- Authentication -->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                    onclick="event.preventDefault();
-                                                this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </x-slot>
-                </x-dropdown>
+                                <!-- Authentication -->
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                        {{ __('خروج') }}
+                                    </x-dropdown-link>
+                                </form>
+                            </x-slot>
+                        </x-dropdown>
+                    </div>
+                @else
+                    <div class="space-x-4">
+                        <a href="{{ route('login') }}" class="text-sm text-gray-700 hover:text-gray-900">ورود</a>
+                        <a href="{{ route('register') }}" class="text-sm text-gray-700 hover:text-gray-900">ثبت نام</a>
+                    </div>
+                @endauth
             </div>
 
             <!-- Hamburger -->
@@ -67,34 +100,71 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
-                {{ __('Dashboard') }}
-            </x-responsive-nav-link>
+            @auth
+                @if(auth()->user()->hasRole('admin'))
+                    <x-responsive-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
+                        {{ __('داشبورد ادمین') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.restaurants.index')" :active="request()->routeIs('admin.restaurants.*')">
+                        {{ __('رستوران‌ها') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.users.index')" :active="request()->routeIs('admin.users.*')">
+                        {{ __('کاربران') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('admin.reservations.index')" :active="request()->routeIs('admin.reservations.*')">
+                        {{ __('رزروها') }}
+                    </x-responsive-nav-link>
+                @endif
+
+                @if(auth()->user()->hasRole('restaurant_owner'))
+                    <x-responsive-nav-link :href="route('restaurant.dashboard')" :active="request()->routeIs('restaurant.dashboard')">
+                        {{ __('داشبورد رستوران') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('restaurant.menus.index')" :active="request()->routeIs('restaurant.menus.*')">
+                        {{ __('منوها') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('restaurant.reservations.index')" :active="request()->routeIs('restaurant.reservations.*')">
+                        {{ __('رزروها') }}
+                    </x-responsive-nav-link>
+                @endif
+            @endauth
         </div>
 
         <!-- Responsive Settings Options -->
-        <div class="pt-4 pb-1 border-t border-gray-200">
-            <div class="px-4">
-                <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
-                <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
-            </div>
+        @auth
+            <div class="pt-4 pb-1 border-t border-gray-200">
+                <div class="px-4">
+                    <div class="font-medium text-base text-gray-800">{{ Auth::user()->name }}</div>
+                    <div class="font-medium text-sm text-gray-500">{{ Auth::user()->email }}</div>
+                </div>
 
-            <div class="mt-3 space-y-1">
-                <x-responsive-nav-link :href="route('profile.edit')">
-                    {{ __('Profile') }}
-                </x-responsive-nav-link>
-
-                <!-- Authentication -->
-                <form method="POST" action="{{ route('logout') }}">
-                    @csrf
-
-                    <x-responsive-nav-link :href="route('logout')"
-                            onclick="event.preventDefault();
-                                        this.closest('form').submit();">
-                        {{ __('Log Out') }}
+                <div class="mt-3 space-y-1">
+                    <x-responsive-nav-link :href="route('profile.edit')" class="w-full text-right">
+                        {{ __('پروفایل') }}
                     </x-responsive-nav-link>
-                </form>
+
+                    <!-- Authentication -->
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <x-responsive-nav-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                            this.closest('form').submit();">
+                            {{ __('خروج') }}
+                        </x-responsive-nav-link>
+                    </form>
+                </div>
             </div>
-        </div>
+        @else
+            <div class="pt-4 pb-1 border-t border-gray-200">
+                <div class="mt-3 space-y-1">
+                    <x-responsive-nav-link :href="route('login')">
+                        {{ __('ورود') }}
+                    </x-responsive-nav-link>
+                    <x-responsive-nav-link :href="route('register')">
+                        {{ __('ثبت نام') }}
+                    </x-responsive-nav-link>
+                </div>
+            </div>
+        @endauth
     </div>
 </nav>

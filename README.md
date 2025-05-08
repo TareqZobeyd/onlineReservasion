@@ -1,61 +1,172 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# سیستم رزرو آنلاین رستوران 🍽️
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+## معرفی
+سیستم رزرو آنلاین رستوران یک پلتفرم جامع برای مدیریت رزرواسیون رستوران‌ها است. این سیستم به کاربران امکان می‌دهد به راحتی میز رستوران مورد نظر خود را رزرو کنند و به صاحبان رستوران‌ها کمک می‌کند تا رزروها را به صورت کارآمد مدیریت کنند.
 
-## About Laravel
+## ویژگی‌های اصلی
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### 👤 بخش کاربران
+- **ثبت‌نام و ورود**
+  - ثبت‌نام با ایمیل و رمز عبور
+  - احراز هویت ایمیل
+  - ورود با ایمیل و رمز عبور
+  - بازیابی رمز عبور
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+- **پروفایل کاربری**
+  - ویرایش اطلاعات شخصی
+  - تغییر رمز عبور
+  - مشاهده تاریخچه رزروها
+  - لغو رزروهای فعال
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- **جستجو و فیلتر رستوران‌ها**
+  - جستجو بر اساس نام، توضیحات و نوع غذا
+  - فیلتر بر اساس نوع غذا
+  - فیلتر بر اساس امتیاز
+  - فیلتر بر اساس محدوده قیمت
+  - فیلتر بر اساس ویژگی‌ها (فضای باز، پارکینگ، سالن خصوصی)
 
-## Learning Laravel
+- **رزرو میز**
+  - انتخاب تاریخ و ساعت
+  - انتخاب تعداد نفرات
+  - بررسی موجودی میز
+  - انتخاب میز از بین میزهای موجود
+  - ثبت رزرو
+  - دریافت تأییدیه رزرو
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 🏪 بخش رستوران‌ها
+- **داشبورد مدیریت**
+  - مشاهده آمار کلی
+  - مدیریت منوها
+  - مدیریت رزروها
+  - مدیریت نظرات
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+- **مدیریت منو**
+  - افزودن دسته‌بندی‌های غذایی
+  - افزودن آیتم‌های منو
+  - تعیین قیمت و توضیحات
+  - فعال/غیرفعال کردن آیتم‌ها
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+- **مدیریت رزروها**
+  - مشاهده لیست رزروها
+  - تأیید یا رد رزروها
+  - مشاهده تقویم رزروها
+  - ارسال پیام به مشتریان
 
-## Laravel Sponsors
+- **مدیریت میزها**
+  - تعریف میزهای رستوران
+  - تعیین ظرفیت هر میز
+  - تعیین موقعیت میزها
+  - مدیریت وضعیت میزها
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+### 👨‍💼 بخش ادمین
+- **مدیریت کاربران**
+  - مشاهده لیست کاربران
+  - فعال/غیرفعال کردن کاربران
+  - مدیریت نقش‌های کاربری
 
-### Premium Partners
+- **مدیریت رستوران‌ها**
+  - تأیید رستوران‌های جدید
+  - ویرایش اطلاعات رستوران‌ها
+  - فعال/غیرفعال کردن رستوران‌ها
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development/)**
-- **[Active Logic](https://activelogic.com)**
+- **مدیریت رزروها**
+  - مشاهده تمام رزروها
+  - مدیریت وضعیت رزروها
+  - گزارش‌گیری از رزروها
 
-## Contributing
+- **مدیریت نظرات**
+  - تأیید/رد نظرات
+  - حذف نظرات نامناسب
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+## تکنولوژی‌ها
+- **فریم‌ورک**: Laravel 12
+- **زبان برنامه‌نویسی**: PHP 8.2
+- **پایگاه داده**: MySQL
+- **فرانت‌اند**: 
+  - Tailwind CSS
+  - Alpine.js
+  - Font Awesome
+- **فونت**: Vazirmatn (فونت فارسی)
 
-## Code of Conduct
+## امنیت
+- احراز هویت دو مرحله‌ای
+- محافظت در برابر CSRF
+- رمزنگاری داده‌های حساس
+- محدودیت تعداد تلاش‌های ورود
+- مدیریت نشست‌ها
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## رابط کاربری
+- طراحی واکنش‌گرا (Responsive)
+- رابط کاربری فارسی
+- پشتیبانی از RTL
+- طراحی مدرن و کاربرپسند
+- انیمیشن‌های روان
 
-## Security Vulnerabilities
+## گزارش‌گیری
+- گزارش رزروها
+- گزارش درآمد
+- گزارش کاربران
+- گزارش نظرات
+- خروجی PDF و Excel
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## پشتیبانی
+- راهنمای کاربری
+- FAQ
+- پشتیبانی آنلاین
 
-## License
+## قابلیت‌های آینده
+- [ ] اپلیکیشن موبایل
+- [ ] سیستم پرداخت آنلاین
+- [ ] سیستم امتیازدهی و نظرات پیشرفته
+- [ ] سیستم تخفیف و کد تخفیف
+- [ ] سیستم عضویت ویژه
+- [ ] سیستم رزرو میز VIP
+- [ ] سیستم مدیریت صف
+- [ ] سیستم مدیریت سفارش آنلاین
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+## نصب و راه‌اندازی
+1. نصب وابستگی‌ها:
+```bash
+composer install
+npm install
+```
+
+2. تنظیم فایل محیطی:
+```bash
+cp .env.example .env
+```
+
+3. تولید کلید برنامه:
+```bash
+php artisan key:generate
+```
+
+4. اجرای مایگریشن‌ها:
+```bash
+php artisan migrate
+```
+
+5. اجرای سیدر‌ها:
+```bash
+php artisan db:seed
+```
+
+6. کامپایل فایل‌های فرانت‌اند:
+```bash
+npm run dev
+```
+
+7. اجرای سرور:
+```bash
+php artisan serve
+```
+
+## نیازمندی‌های سیستم
+- PHP >= 8.2
+- MySQL >= 8.0
+- Composer
+- Node.js & NPM
+- Web Server (Apache/Nginx)
+
+## لایسنس
+این پروژه تحت لایسنس MIT منتشر شده است.
