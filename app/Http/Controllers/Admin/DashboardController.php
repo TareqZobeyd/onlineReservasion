@@ -78,14 +78,4 @@ class DashboardController extends Controller
             'monthlyReservations'
         ));
     }
-} 
-        return view('admin.dashboard', compact(
-            'stats',
-            'reservations_by_day',
-            'reservations_by_status',
-            'recentReservations',
-            'new_users',
-            'popular_restaurants',
-            'monthlyReservations'
-        ));
-    }
+}
